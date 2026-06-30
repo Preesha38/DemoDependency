@@ -5,34 +5,29 @@ plugins {
 
 android {
     namespace 'com.example.demodependency'
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk 36
 
     defaultConfig {
-//        applicationId "com.example.demodependency"
         minSdk 24
         targetSdk 36
+
         versionCode 1
         versionName "1.0"
-        consumerProguardFiles "consumer-rules.pro"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
         release {
-            optimization {
-                enable false
-            }
+            minifyEnabled false
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+
     publishing {
         singleVariant("release") {
             withSourcesJar()
@@ -40,19 +35,18 @@ android {
     }
 }
 
-publishing {
-    publications {
-        register("release", MavenPublication) {
-            afterEvaluate {
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
                 from components.release
-            }
 
-            groupId = "com.github.Preesha38"
-            artifactId = "DemoDependency"
-            version = "v1.0.3"
+                groupId = "com.github.Preesha38"
+                artifactId = "DemoDependency"
+                version = "v1.0.3"
+            }
         }
     }
-
 }
 
 dependencies {
@@ -60,8 +54,8 @@ dependencies {
     implementation libs.appcompat
     implementation libs.constraintlayout
     implementation libs.material
+
     testImplementation libs.junit
     androidTestImplementation libs.espresso.core
     androidTestImplementation libs.ext.junit
 }
-
