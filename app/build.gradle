@@ -42,7 +42,7 @@ afterEvaluate {
 
                 groupId = "com.github.Preesha38"
                 artifactId = "DemoDependency"
-                version = "v1.0.3"
+                version = "v1.0.5"
             }
         }
     }
